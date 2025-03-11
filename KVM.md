@@ -29,11 +29,11 @@ sudo iptables -A FORWARD -o br-tap -j ACCEPT
 
 - In case you want to make this survive after a reboot, you need to save your iptables configuration.
     - install iptables-persistent if you do not have it installed already.
+    - save your rules so they'll start at boot.
+
 ```BASH
 sudo apt install -y iptables-persistent
 ```
-
-    - save your actual rules so they'll start at boot.
 ```BASH
 sudo iptables-save | sudo tee /etc/iptables/rules.v4 > /dev/null
 ```
@@ -47,13 +47,11 @@ nmcli connection show
 ```BASH
 echo -e "[keyfile]\nunmanaged-devices=interface-name:br-tap" | sudo tee /etc/NetworkManager/conf.d/99-ignore-br-tap.conf > /dev/null
 ```
-
-    - It's time to reload NetworkManager now.
+- It's time to reload NetworkManager now.
+- And check with `nmcli`. You should NOT see your br-tap.
 ```BASH
 sudo systemctl restart NetworkManager
 ```
-
-    - And check with `nmcli`. You should NOT see your br-tap.
 ```BASH
 nmcli connection show
 ```
