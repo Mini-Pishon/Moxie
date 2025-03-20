@@ -57,3 +57,5 @@ nmcli connection show
 ```
 
 Enjoy, bye.
+
+> EDIT : this thing still does not survive after a f$cking reboot. Need to check later.
